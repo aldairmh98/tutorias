@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet name="./css/default.css"/>
+        <h:outputStylesheet name="./css/cssLayout.css"/>
+        <h:outputStylesheet name="./bootstrap/css/bootstrap.css"/>
+        <title>Tutorias de profesor</title>
+    </h:head>
+
+    <h:body>
+
+        <ui:composition>
+            <h3 class="text-center">Tutorias pendientes</h3>
+            <div class="container">
+                <br></br><br></br>
+                <h:dataTable
+                    value="#{tutors_data.tutorias}" var="t"
+                    styleClass="table table-responsive"
+                    headerClass=""
+                    rowClasses=""
+                    >
+
+                    <h:column>
+                        <!-- column header -->
+                        <f:facet name="header">Salón</f:facet>
+                        <!-- row record -->
+                        #{t.room}
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Edificio</f:facet>
+                            #{t.building}
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Fecha</f:facet>
+                            #{t.date.toString()}
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Hora</f:facet>
+                            #{t.time}
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Grupo</f:facet>
+                            #{t.group}
+                    </h:column>
+                </h:dataTable>
+            </div>
+        </ui:composition>
+    </h:body>
+
+</html>

@@ -1,0 +1,152 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet name="./css/default.css"/>
+        <h:outputStylesheet name="./css/cssLayout.css"/>
+        <h:outputStylesheet name="bootstrap/css/bootstrap.css" />
+        <title>Facelets Template</title>
+    </h:head>
+
+    <h:body>
+
+        <div class="container">
+            <h3 class="text-center">Control de tutorías</h3>
+
+            <div class="row">
+
+                <div class="col-md-3">
+                    <h4>Datos de la tutoría</h4>
+                    <div class="login-form p-3">
+                        <h:form>
+                            <h:outputText value="Salón"></h:outputText>
+                            <h:inputText required="true" requiredMessage="Campo no válido" id="room" value="#{bean_tutoria.tutoria.room}" class="form-control"> 
+                                <f:convertNumber integerOnly="true" type="number" />
+                                <f:validateLongRange minimum="1" maximum="1000" />
+                            </h:inputText>
+                            <h:message class="alert-danger"  for="room"></h:message>
+                            <br></br><br></br>
+                            <h:outputText value="Edificio"></h:outputText>
+                            <h:inputText required="true" requiredMessage="Campo no válido" id="building" 
+                                         value="#{bean_tutoria.tutoria.building}" class="form-control"> 
+                                <f:convertNumber integerOnly="true" type="number" />
+                                <f:validateLongRange minimum="1" maximum="1000" />
+                            </h:inputText>
+                            <h:message class="alert-danger"  for="building"></h:message>
+                            <br></br><br></br>
+                            <h:outputText value="Hora"></h:outputText>
+                            <h:inputText required="true" requiredMessage="Campo no válido" id="time" 
+                                         value="#{bean_tutoria.tutoria.time}" class="form-control"> 
+                                <f:convertNumber integerOnly="true" type="number" />
+                                <f:validateLongRange minimum="1" maximum="1000" />
+                            </h:inputText>
+                            <h:message class="alert-danger"  for="time"></h:message>
+                            <br></br><br></br>
+                            <h:outputText value="Día"></h:outputText>
+                            <h:inputText required="true" requiredMessage="Campo no válido" id="date-day" 
+                                         value="#{bean_tutoria.day}" class="form-control"> 
+                                <f:convertNumber integerOnly="true" type="number" />
+                                <f:validateLongRange minimum="1" maximum="31" />
+                            </h:inputText>
+                            <h:message class="alert-danger"  for="date-day"></h:message>
+                            <h:outputText value="Mes"></h:outputText>
+                            <h:inputText required="true" requiredMessage="Campo no válido" id="date-mm" 
+                                         value="#{bean_tutoria.month}" class="form-control"> 
+                                <f:convertNumber integerOnly="true" type="number" />
+                                <f:validateLongRange minimum="1" maximum="12" />
+                            </h:inputText>
+                            <h:message class="alert-danger"  for="date-mm"></h:message>
+                            <h:outputText value="Año"></h:outputText>
+                            <h:inputText required="true" requiredMessage="Campo no válido" id="date-yy" 
+                                         value="#{bean_tutoria.year}" class="form-control"> 
+                                <f:convertNumber integerOnly="true" type="number" />
+                                <f:validateLongRange minimum="2019" maximum="2100" />
+                            </h:inputText>
+                            <h:message class="alert-danger"  for="date-yy"></h:message>
+                            <br></br><br></br>
+                            <h:outputText value="Grupo"></h:outputText>
+                            <h:inputText required="true" requiredMessage="Campo no válido" id="group" 
+                                         value="#{bean_tutoria.tutoria.group}" class="form-control"> 
+                                <f:convertNumber integerOnly="true" type="number" />
+                                <f:validateLongRange minimum="1" maximum="1000" />
+                            </h:inputText>
+                            <h:message class="alert-danger"  for="group"></h:message>
+                            <br></br><br></br>
+                            <h:outputText value="Profesor"></h:outputText>
+                            <h:selectOneMenu id="teacher" class="form-control" value="#{bean_tutoria.tutoria.teacher_id}">
+                                <f:selectItems value="#{bean_tutoria.teachers}" var="user" itemValue="#{user.id}" itemLabel="#{user.name} #{user.last_name}" />
+                            </h:selectOneMenu>
+                            <h:message class="alert-danger"  for="teacher"></h:message>
+                            <br></br><br></br>
+                            <h:commandButton class="btn btn-success" action="#{bean_tutoria.send()}" value="Guardar cambios"></h:commandButton>
+
+                            <br></br>
+
+                        </h:form>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <br></br><br></br>
+                    <h:dataTable
+                        value="#{bean_tutoria.tutorias}" var="t"
+                        styleClass="table table-responsive"
+                        headerClass=""
+                        rowClasses=""
+                        >
+
+                        <h:column>
+                            <!-- column header -->
+                            <f:facet name="header">id</f:facet>
+                            <!-- row record -->
+                            #{t.id}
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">Salón</f:facet>
+                                #{t.room}
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">Edificio</f:facet>
+                                #{t.building}
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">Fecha</f:facet>
+                                #{t.date.toString()}
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">Hora</f:facet>
+                                #{t.time}
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">Grupo</f:facet>
+                                #{t.group}
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">Seleccionar</f:facet>
+                            <h:form>
+                                <h:commandButton class="btn btn-primary" action="#{bean_tutoria.prepareToUpdate()}" value="Modificar">
+                                    <f:setPropertyActionListener target="#{bean_tutoria.tutoria_id}" value="#{t.id}"></f:setPropertyActionListener>
+                                </h:commandButton>
+                                <h:commandButton class="btn btn-danger" action="#{bean_tutoria.delete()}" value="Borrar">
+                                    <f:setPropertyActionListener target="#{bean_tutoria.tutoria_id}" value="#{t.id}"></f:setPropertyActionListener>
+                                </h:commandButton>
+                            </h:form>
+                        </h:column>
+                    </h:dataTable>
+                </div>
+            </div>
+        </div>
+
+    </h:body>
+
+</html>

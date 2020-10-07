@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <f:facet name="middle">
+            <h:outputStylesheet name="bootstrap/css/bootstrap.css" />
+
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" />
+
+            <h:outputScript name="bootstrap/js/bootstrap.js" />
+        </f:facet>
+    </h:head>
+    <h:body>
+        <!-- As a heading -->
+        <nav class="navbar navbar-default">
+            <span class="navbar-brand mb-0 h1">Tutorías</span>
+        </nav>
+        <div class="container p-3">
+            <div class="row"> 
+                <div class="col-md-6 col-sm-12 ">
+                    <h1>Registro</h1>
+                    <br></br><br></br>
+                    <div class="login-form p-3">
+                        <h:form class="center">
+                            <h:outputText value="Matricula"></h:outputText>
+                            <h:inputText required="true" requiredMessage="Campo no puede ir vacío" id="user" value="#{login.user}" class="form-control"> </h:inputText>
+                            <h:message class="alert-danger"  for="user"></h:message>
+                            <h:outputText class="alert-danger" value="#{login.userMessage}" ></h:outputText>
+                            <br></br><br></br>
+                            <h:outputText value="Contraseña"></h:outputText>
+                            <h:inputSecret required="true" requiredMessage="Campo no puede ir vacío" id="password" value="#{login.password}" class="form-control"> </h:inputSecret>
+                            <h:message class="alert-danger"  for="password"></h:message>
+                            <br></br><br></br>
+                            <h:outputText value="nombre"></h:outputText>
+                            <h:inputText required="true" requiredMessage="Campo no puede ir vacío" id="name" value="#{login.nombre}" class="form-control"> </h:inputText>
+                            <h:message class="alert-danger" for="name"></h:message>
+                            <br></br><br></br>
+                            <h:outputText value="apellidos"></h:outputText>
+                            <h:inputText required="true" requiredMessage="Campo no puede ir vacío" id="apellidos" value="#{login.apellidos}" class="form-control"> </h:inputText>
+                            <h:message class="alert-danger" for="apellidos"></h:message>
+                            <br></br><br></br>
+                            <h:outputText value="tipos"></h:outputText>
+                            <h:selectOneMenu required="true" requiredMessage="Campo no puede ir vacío" id="tipos" value="#{login.tipo}" class="form-control" > 
+                                <f:selectItem itemValue = "1" itemLabel = "Profesor" /> 
+                                <f:selectItem itemValue = "2" itemLabel = "Alumno" /> 
+                            </h:selectOneMenu>
+                            <h:message class="alert-danger" for="tipos"></h:message>
+                            <br></br><br></br>
+
+                            <h:commandButton class="btn btn-primary" value="Registrarse" action="#{login.login(false)}"></h:commandButton>
+                        </h:form>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+
+                    <h1>Ingreso a la sesión</h1>
+                    <br></br><br></br>
+                    <div class="login-form p-3">
+                        <h:form class="center">
+                            <h:outputText value="Nombre de usuario"></h:outputText>
+                            <h:inputText required="true" requiredMessage="Campo no puede ir vacío" id="user" value="#{login.user}" class="form-control"> </h:inputText>
+                            <h:message class="alert-danger" for="user"></h:message>
+                            <br></br><br></br>
+                            <h:outputText value="Contraseña"></h:outputText>
+                            <h:inputSecret required="true" requiredMessage="Campo no puede ir vacío" id="password" value="#{login.password}" class="form-control"> </h:inputSecret>
+                            <h:message class="alert-danger" for="password"></h:message>
+                            <br></br><h:outputText class="alert-danger" value="#{login.loginMessage}" ></h:outputText><br></br>
+                            <h:commandButton class="btn btn-success" value="Ingresar" action="#{login.login(true)}"></h:commandButton>
+                        </h:form>                
+                    </div>
+                </div>
+            </div>
+        </div>
+    </h:body>
+</html>
+

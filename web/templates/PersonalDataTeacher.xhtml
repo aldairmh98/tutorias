@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet name="./css/default.css"/>
+        <h:outputStylesheet name="./css/cssLayout.css"/>
+        <h:outputStylesheet name="bootstrap/css/bootstrap.css" />
+        <title>Facelets Template</title>
+    </h:head>
+
+    <h:body>
+
+        <div class="container">
+            <h3 class="text-center">MODIFICAR DATOS</h3>
+            <br></br><br></br>
+            <div class="row">
+                <div class="col-md-4">
+                    <h4 class="text-center">Datos personales</h4>
+                    <div class="login-form p-3">
+                        <h:form class="center">
+                            <h:outputText value="Matricula"></h:outputText>
+                            <h:inputText required="true" requiredMessage="Campo no puede ir vacío" id="user" value="#{tutors_data.currentUser.username}" class="form-control"> </h:inputText>
+                            <h:message class="alert-danger"  for="user"></h:message>
+                            <h:outputText class="alert-danger" value="#{tutors_data.userMessage}" ></h:outputText>
+                            <br></br><br></br>
+                            <h:outputText value="Contraseña"></h:outputText>
+                            <h:inputSecret required="true" requiredMessage="Campo no puede ir vacío" id="password" value="#{tutors_data.currentUser.password}" class="form-control"> </h:inputSecret>
+                            <h:message class="alert-danger"  for="password"></h:message>
+                            <br></br><br></br>
+                            <h:outputText value="nombre"></h:outputText>
+                            <h:inputText required="true" requiredMessage="Campo no puede ir vacío" id="name" value="#{tutors_data.currentUser.name}" class="form-control"> </h:inputText>
+                            <h:message class="alert-danger" for="name"></h:message>
+                            <br></br><br></br>
+                            <h:outputText value="apellidos"></h:outputText>
+                            <h:inputText required="true" requiredMessage="Campo no puede ir vacío" id="apellidos" value="#{tutors_data.currentUser.last_name}" class="form-control"> </h:inputText>
+                            <h:message class="alert-danger" for="apellidos"></h:message>
+                            <br></br><br></br>
+                            <h:commandButton class="btn btn-primary" value="Guardar cambios" action="#{tutors_data.save()}"></h:commandButton>
+                        </h:form>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <h4 class="text-center">Depuración de alumnos</h4>
+                    <br></br><br></br>
+                    <h:dataTable
+                        value="#{tutors_data.teachers}" var="t"
+                        styleClass="table table-responsive"
+                        headerClass=""
+                        rowClasses=""
+                        >
+
+                        <h:column>
+                            <!-- column header -->
+                            <f:facet name="header">Nombre</f:facet>
+                            <!-- row record -->
+                            #{t.name}
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">Apellido</f:facet>
+                                #{t.last_name}
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">Usuario</f:facet>
+                                #{t.username}
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">Seleccionar</f:facet>
+                            <h:form>
+                                <h:commandButton class="btn btn-danger" action="#{tutors_data.deleteStudent()}" value="Quitar">
+                                    <f:setPropertyActionListener target="#{tutors_data.teacher_id}" value="#{t.id}"></f:setPropertyActionListener>
+                                </h:commandButton>
+                            </h:form>
+                        </h:column>
+                    </h:dataTable>
+                </div>
+            </div>
+        </div>
+
+    </h:body>
+
+</html>
